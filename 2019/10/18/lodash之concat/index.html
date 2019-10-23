@@ -341,15 +341,8 @@ return arrayPush(isArray(array) ? copyArray(array) : [array], baseFlatten(args, 
 
 
     
-    {% if theme.gitment.mint %}
-{% set CommentsClass = "Gitmint" %}
-<link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
-<script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
-{% else %}
-{% set CommentsClass = "Gitment" %}
-<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+    <link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
 <script src="https://billts.site/js/gitment.js"></script>
-{% endif %}
     <div id="comments">
         <script>
             var gitment = new Gitment({
