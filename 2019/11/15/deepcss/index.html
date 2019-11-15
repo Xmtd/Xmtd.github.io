@@ -3,21 +3,25 @@
 <head>
   <meta charset="utf-8">
   
-  <title>lodash之concat | Xmtd</title>
+  <title>vue css中/deep/深度选择 | Xmtd</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="mtd,mtd's Blog" />
   
-  <meta name="description" content="function copyArray(source, array) {    var index = -1,        length = source.length; &#x2F;&#x2F; 这里判断 array 是否为 undefined，如果是就定义一个与 source 长度相等的数组。 array || (array = Array(length));  while (++index &amp;lt; lengt">
-<meta name="keywords" content="源码">
+  <meta name="description" content="vue css中&#x2F;deep&#x2F;用法&#x2F;deep&#x2F;的意思大概为深入的，深远的（深度选择）。Scoped CSS规范是Web组件产生不污染其他组件，也不被其他组件污染的CSS规范。这样在打包的时候会生成一个独一无二hash值，这样父组件的样式就不会影响到子组件了；再用别人或者第三方组件是，要是想修改其组件的样式，一般都是提取公共文件，但是存在问题是有时候你修改一处就可能影响到别的地方，这个时候就可以需要一">
+<meta name="keywords" content="css">
 <meta property="og:type" content="article">
-<meta property="og:title" content="lodash之concat">
-<meta property="og:url" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;2019&#x2F;10&#x2F;18&#x2F;lodash%E4%B9%8Bconcat&#x2F;index.html">
+<meta property="og:title" content="vue css中&#x2F;deep&#x2F;深度选择">
+<meta property="og:url" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;2019&#x2F;11&#x2F;15&#x2F;deepcss&#x2F;index.html">
 <meta property="og:site_name" content="Xmtd">
-<meta property="og:description" content="function copyArray(source, array) {    var index = -1,        length = source.length; &#x2F;&#x2F; 这里判断 array 是否为 undefined，如果是就定义一个与 source 长度相等的数组。 array || (array = Array(length));  while (++index &amp;lt; lengt">
+<meta property="og:description" content="vue css中&#x2F;deep&#x2F;用法&#x2F;deep&#x2F;的意思大概为深入的，深远的（深度选择）。Scoped CSS规范是Web组件产生不污染其他组件，也不被其他组件污染的CSS规范。这样在打包的时候会生成一个独一无二hash值，这样父组件的样式就不会影响到子组件了；再用别人或者第三方组件是，要是想修改其组件的样式，一般都是提取公共文件，但是存在问题是有时候你修改一处就可能影响到别的地方，这个时候就可以需要一">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-04T03:30:27.332Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;WechatIMG85.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;WechatIMG87.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;WechatIMG86.png">
+<meta property="og:updated_time" content="2019-11-15T06:51:11.246Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;WechatIMG85.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -96,20 +100,20 @@
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-lodash之concat" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-deepcss" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      lodash之concat
+      vue css中/deep/深度选择
     </h1>
     <div class="post-title-bar">
       <ul>
           
         <li>
-          <i class="fa fa-calendar"></i>  2019-10-18
+          <i class="fa fa-calendar"></i>  2019-11-15
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -125,93 +129,16 @@
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <p>function copyArray(source, array) {<br>    var index = -1,<br>        length = source.length;</p>
-<pre><code>// 这里判断 array 是否为 undefined，如果是就定义一个与 source 长度相等的数组。
-array || (array = Array(length));
-
-while (++index &lt; length) {
-    array[index] = source[index];
-}
-return array;</code></pre><p>}</p>
-<p>// arrayPush方法是在传入的参数array基础上进行拼接的<br>function arrayPush(array, values) {<br>    var index = -1,<br>        length = values.length,<br>        offset = array.length;</p>
-<pre><code>while (++index &lt; length) {
-    array[offset + index] = values[index];
-}
-return array;
-/**
- * 举例分析：
- * arrayPush([1,2,3], [4, [5]]);
- * 刚进来 index = -1;  length = 2; offset = 3;
- * 进入循环
- * index = 0; offset + index = 3; array[3] = values[0] = 4;
- * index = 1; offset + index = 4; array[4] = values[1] = [5];
- * index = 2; 停止循环
- *
- * array = [1,2,3,4,[5]]
- *
- */</code></pre><p>}</p>
-<p>var isArray = Array.isArray;</p>
-<p>// 这个方法是在判断 value 是否是可以被打平的 arguments 对象或者数组。如果是，返回 true，若不是，则返回 false<br>function isFlattenable(value) {<br>    return isArray(value) || isArguments(value) ||<br>        !!(spreadableSymbol &amp;&amp; value &amp;&amp; value[spreadableSymbol]);<br>}</p>
-<p>/**<br> *</p>
-<ul>
-<li><p>@param array</p>
-</li>
-<li><p>@param depth</p>
-</li>
-<li><p>@param predicate  每次迭代调用的函数</p>
-</li>
-<li><p>@param isStrict   限制</p>
-</li>
-<li><p>@param result</p>
-</li>
-<li><p>@returns {Array}</p>
-</li>
-<li><p>/<br>// 减少嵌套数组<br>function baseFlatten(array, depth, predicate, isStrict, result) {   // 2, [3], [4], -1: [1]<br>  var index = -1,</p>
-<pre><code>length = array.length;</code></pre><p>  // 判断是否传入 predicate, 若没有，将方法 isFlattenable 赋值给 predicate<br>  predicate || (predicate = isFlattenable);</p>
-<p>  result || (result = []);</p>
-<p>  //[1,[3], [4, [5]]]</p>
-<p>  while (++index &lt; length) {</p>
-<pre><code>var value = array[index];
-if (depth &gt; 0 &amp;&amp; predicate(value)) {
-    if (depth &gt; 1) {
-        // Recursively flatten arrays (susceptible to call stack limits).
-        baseFlatten(value, depth - 1, predicate, isStrict, result);
-    } else {
-        arrayPush(result, value);
-    }
-} else if (!isStrict) {
-    result[result.length] = value;
-}</code></pre><p>  }<br>  return result;<br>}</p>
-</li>
-</ul>
-<p>// 源码<br>// _.concat(array, [values])  创建一个新数组，将array与任何数组 或 值连接在一起<br>/**<br>var array = [1];<br>var other = _.concat(array, 2, [3], [[4]]);</p>
-<p>console.log(other);<br>// =&gt; [1, 2, 3, [4]]</p>
-<p>console.log(array);<br>*/<br>function concat() {  // [1], 2, [3], [4]<br>    // 获取参数个数<br>    var length = arguments.length;</p>
-<pre><code>if (!length) {
-    return [];
-}
-
-var args = Array(length - 1),   // 去除0索引以外的参数
-    array = arguments[0],      // 第一个元素
-    index = length;
-
-// 从后往前添加
-while (index--) {
-    args[index - 1] = arguments[index];
-    /**
-     * 4 index = 3;  args[2] = arguments[3] = [4];
-     * 3 index = 2;  args[1] = arguments[2] = [3];
-     * 2 index = 1;  args[0] = arguments[1] = 2;
-     * 1 index = 0;  args[-1] = arguments[0] = [1];
-     * args = [2, [3], [4], -1: [1]]
-     */
-}
-return arrayPush(isArray(array) ? copyArray(array) : [array], baseFlatten(args, 1));</code></pre><p>}</p>
+            <h3 id="vue-css中-deep-用法"><a href="#vue-css中-deep-用法" class="headerlink" title="vue css中/deep/用法"></a>vue css中/deep/用法</h3><p><code>/deep/</code>的意思大概为深入的，深远的（深度选择）。Scoped CSS规范是Web组件产生不污染其他组件，也不被其他组件污染的CSS规范。<br>这样在打包的时候会生成一个独一无二hash值，这样父组件的样式就不会影响到子组件了；再用别人或者第三方组件是，要是想修改其组件的样式，<br>一般都是提取公共文件，但是存在问题是有时候你修改一处就可能影响到别的地方，这个时候就可以需要一种方式，既不影响<br>别的地方，又能修改子组件的样式。</p>
+<p><img src="/images/WechatIMG85.png" alt="avatar"></p>
+<p>例子中使用了scoped属性，编译之后都会加上<code>data-v-5419d6af</code>的hash值，此时不用<code>/deep/</code>的话是，el-tabs的css会生效，<br>el-tabs底下的class就不会生效了，加上<code>deep</code>后就会进行深度选择，就会生效，寻找路径为下图</p>
+<p><img src="/images/WechatIMG87.png" alt="avatar"><br><img src="/images/WechatIMG86.png" alt="avatar"></p>
+<p>这类似于css module中的global属性，加上global修改第三方组件才能生效</p>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2019年11月04日 11:30</p>
-        <p>原始链接： <a class="post-url" href="/2019/10/18/lodash%E4%B9%8Bconcat/" title="lodash之concat">https://xmtd.github.io/2019/10/18/lodash%E4%B9%8Bconcat/</a></p>
+        <p>最后更新： 2019年11月15日 14:51</p>
+        <p>原始链接： <a class="post-url" href="/2019/11/15/deepcss/" title="vue css中/deep/深度选择">https://xmtd.github.io/2019/11/15/deepcss/</a></p>
         <footer>
             <a href="https://Xmtd.github.io">
                 <img src="/images/logo.png" alt="mtd">
@@ -264,7 +191,7 @@ return arrayPush(isArray(array) ? copyArray(array) : [array], baseFlatten(args, 
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xmtd.github.io/2019/10/18/lodash%E4%B9%8Bconcat/&title=《lodash之concat》 — Xmtd&pic=/images/lodash.png" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xmtd.github.io/2019/11/15/deepcss/&title=《vue css中/deep/深度选择》 — Xmtd&pic=/images/wechat88.png" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -274,22 +201,22 @@ return arrayPush(isArray(array) ? copyArray(array) : [array], baseFlatten(args, 
             </a>
           </li>
           <li>
-            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xmtd.github.io/2019/10/18/lodash%E4%B9%8Bconcat/&title=《lodash之concat》 — Xmtd&source=" data-title="QQ">
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xmtd.github.io/2019/11/15/deepcss/&title=《vue css中/deep/深度选择》 — Xmtd&source=" data-title="QQ">
               <i class="fa fa-qq"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xmtd.github.io/2019/10/18/lodash%E4%B9%8Bconcat/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xmtd.github.io/2019/11/15/deepcss/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《lodash之concat》 — Xmtd&url=https://xmtd.github.io/2019/10/18/lodash%E4%B9%8Bconcat/&via=https://Xmtd.github.io" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《vue css中/deep/深度选择》 — Xmtd&url=https://xmtd.github.io/2019/11/15/deepcss/&via=https://Xmtd.github.io" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xmtd.github.io/2019/10/18/lodash%E4%B9%8Bconcat/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xmtd.github.io/2019/11/15/deepcss/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -299,7 +226,7 @@ return arrayPush(isArray(array) ? copyArray(array) : [array], baseFlatten(args, 
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" target="_blank" rel="noopener" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://xmtd.github.io/2019/10/18/lodash%E4%B9%8Bconcat/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://xmtd.github.io/2019/11/15/deepcss/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -311,7 +238,7 @@ return arrayPush(isArray(array) ? copyArray(array) : [array], baseFlatten(args, 
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/源码/" class="color3">源码</a>
+    <a href="/tags/css/" class="color4">css</a>
       
   </li>
 
@@ -322,19 +249,20 @@ return arrayPush(isArray(array) ? copyArray(array) : [array], baseFlatten(args, 
 </article>
 
 
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#vue-css中-deep-用法"><span class="post-toc-text">vue css中/deep/用法</span></a></li></ol>
+        </nav>
+    </aside>
+    
 
 <nav id="article-nav">
   
-    <a href="/2019/11/04/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
-
-      <span class="article-nav-title">
-        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
-        
-          Hello World
-        
-      </span>
-    </a>
   
+    <a href="/2019/11/04/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Hello World</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
   
 </nav>
 
@@ -346,7 +274,7 @@ return arrayPush(isArray(array) ? copyArray(array) : [array], baseFlatten(args, 
     <div id="comments">
         <script>
             var gitment = new Gitment({
-                id: 'lodash之concat',
+                id: 'vue css中/deep/深度选择',
                 owner: 'Xmtd',
                 repo: 'xmtd-comments',
                 oauth: {
