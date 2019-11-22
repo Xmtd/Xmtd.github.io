@@ -16,12 +16,15 @@
 <meta property="og:site_name" content="Xmtd">
 <meta property="og:description" content="vue css中&#x2F;deep&#x2F;用法&#x2F;deep&#x2F;的意思大概为深入的，深远的（深度选择）。Scoped CSS规范是Web组件产生不污染其他组件，也不被其他组件污染的CSS规范。这样在打包的时候会生成一个独一无二hash值，这样父组件的样式就不会影响到子组件了；再用别人或者第三方组件是，要是想修改其组件的样式，一般都是提取公共文件，但是存在问题是有时候你修改一处就可能影响到别的地方，这个时候就可以需要一">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;WechatIMG85.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;WechatIMG87.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;WechatIMG8282.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;WechatIMG86.png">
-<meta property="og:updated_time" content="2019-11-18T07:28:50.141Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;WechatIMG85.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;noDeep.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;WechatIMG87.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;deep.png">
+<meta property="og:updated_time" content="2019-11-22T08:36:57.315Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;WechatIMG85.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;WechatIMG8282.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -130,14 +133,22 @@
       
             
             <h3 id="vue-css中-deep-用法"><a href="#vue-css中-deep-用法" class="headerlink" title="vue css中/deep/用法"></a>vue css中/deep/用法</h3><p><code>/deep/</code>的意思大概为深入的，深远的（深度选择）。Scoped CSS规范是Web组件产生不污染其他组件，也不被其他组件污<br>染的CSS规范。这样在打包的时候会生成一个独一无二hash值，这样父组件的样式就不会影响到子组件了；再用别人或者第三<br>方组件是，要是想修改其组件的样式，一般都是提取公共文件，但是存在问题是有时候你修改一处就可能影响到别的地方，这<br>个时候就可以需要一种方式，既不影响别的地方，又能修改子组件的样式。</p>
-<p><img src="/images/WechatIMG85.png" alt="avatar"></p>
-<p>例子中使用了scoped属性，编译之后都会加上<code>data-v-5419d6af</code>的hash值，此时不用<code>/deep/</code>的话是，el-tabs的css会<br>生效，el-tabs底下的class就不会生效了，加上<code>deep</code>后就会进行深度选择，就会生效，寻找路径为下图</p>
-<p><img src="/images/WechatIMG87.png" alt="avatar"><br><img src="/images/WechatIMG86.png" alt="avatar"></p>
-<p>这类似于css module中的global属性，加上global修改第三方组件才能生效</p>
+<ul>
+<li><em>加入scoped属性</em></li>
+</ul>
+<p><img src="/images/WechatIMG8282.png" alt="avatar"><br><img src="/images/WechatIMG86.png" alt="avatar"><br>可以看出，scoped属性会将 template 中的每个元素加入 [data-v-xxxx]的hash值，但如果引用了第三方组件，<code>默认只会对组件的最外层（div）加入这个 [data-v-xxxx] 属性，但第二层开始就没有效果了</code>，如上图所示，第一层el-tabs加上了[data-v-xxxx]，底下<br>的el-tabs__header就没有了</p>
+<ul>
+<li><em>这个时候修改样式，未加/deep/</em></li>
+</ul>
+<p><img src="/images/WechatIMG85.png" alt="avatar"><br><img src="/images/noDeep.png" alt="avatar"><br>编译后的css可以看出，寻找的路径为<code>.m-transaction-details-wrapper .el-tabs .el-tabs__header[data-v-5419d6af]</code><br>但是在看html元素上，并没有在<code>.el-tabs__header</code>加入[data-v-5419d6af]，所以导致不生效</p>
+<ul>
+<li><em>加上/deep/</em></li>
+</ul>
+<p><img src="/images/WechatIMG87.png" alt="avatar"><br><img src="/images/deep.png" alt="avatar"><br>此时编译后的css寻找路径为<code>.m-transaction-details-wrapper[data-v-5419d6af] .el-tabs .el-tabs__header</code>,就可以生<br>效了，这类似于css module中的global属性，加上global修改第三方组件才能生效</p>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2019年11月18日 15:28</p>
+        <p>最后更新： 2019年11月22日 16:36</p>
         <p>原始链接： <a class="post-url" href="/2019/11/15/deepcss/" title="vue css中/deep/深度选择">https://xmtd.github.io/2019/11/15/deepcss/</a></p>
         <footer>
             <a href="https://Xmtd.github.io">
