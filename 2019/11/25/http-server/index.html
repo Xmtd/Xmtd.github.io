@@ -3,28 +3,23 @@
 <head>
   <meta charset="utf-8">
   
-  <title>vue css中/deep/深度选择 | Xmtd</title>
+  <title>http server | Xmtd</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="mtd,mtd's Blog" />
   
-  <meta name="description" content="vue css中&#x2F;deep&#x2F;用法&#x2F;deep&#x2F;的意思大概为深入的，深远的（深度选择）。Scoped CSS规范是Web组件产生不污染其他组件，也不被其他组件污染的CSS规范。这样在打包的时候会生成一个独一无二hash值，这样父组件的样式就不会影响到子组件了；再用别人或者第三方组件是，要是想修改其组件的样式，一般都是提取公共文件，但是存在问题是有时候你修改一处就可能影响到别的地方，这个时候就可以需要一">
-<meta name="keywords" content="css,vue">
+  <meta name="description" content="使用http-server快速搭建本地服务在静态页面中需要进行局域网进行访问时，可以开启这个 http-server 来进行访问  该环境是基于node环境的，所以必须先安装node.js  打开命令行模式，输入node -v如果显示了版本号，就说明已经安装完成。如果提示没有这个命令，请在node.js官网进行安装   如果完成上一步，在命令行下进行安装http-server,命令是npm ins">
+<meta name="keywords" content="server">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue css中&#x2F;deep&#x2F;深度选择">
-<meta property="og:url" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;2019&#x2F;11&#x2F;15&#x2F;deepcss&#x2F;index.html">
+<meta property="og:title" content="http server">
+<meta property="og:url" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;2019&#x2F;11&#x2F;25&#x2F;http-server&#x2F;index.html">
 <meta property="og:site_name" content="Xmtd">
-<meta property="og:description" content="vue css中&#x2F;deep&#x2F;用法&#x2F;deep&#x2F;的意思大概为深入的，深远的（深度选择）。Scoped CSS规范是Web组件产生不污染其他组件，也不被其他组件污染的CSS规范。这样在打包的时候会生成一个独一无二hash值，这样父组件的样式就不会影响到子组件了；再用别人或者第三方组件是，要是想修改其组件的样式，一般都是提取公共文件，但是存在问题是有时候你修改一处就可能影响到别的地方，这个时候就可以需要一">
+<meta property="og:description" content="使用http-server快速搭建本地服务在静态页面中需要进行局域网进行访问时，可以开启这个 http-server 来进行访问  该环境是基于node环境的，所以必须先安装node.js  打开命令行模式，输入node -v如果显示了版本号，就说明已经安装完成。如果提示没有这个命令，请在node.js官网进行安装   如果完成上一步，在命令行下进行安装http-server,命令是npm ins">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;WechatIMG8282.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;WechatIMG86.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;WechatIMG85.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;noDeep.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;WechatIMG87.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;deep.png">
-<meta property="og:updated_time" content="2019-11-22T08:36:57.315Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;http-server.png">
+<meta property="og:updated_time" content="2019-11-25T06:28:19.768Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;WechatIMG8282.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;http-server.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -103,20 +98,20 @@
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-deepcss" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-http-server" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      vue css中/deep/深度选择
+      http server
     </h1>
     <div class="post-title-bar">
       <ul>
           
         <li>
-          <i class="fa fa-calendar"></i>  2019-11-15
+          <i class="fa fa-calendar"></i>  2019-11-25
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -132,24 +127,24 @@
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <h3 id="vue-css中-deep-用法"><a href="#vue-css中-deep-用法" class="headerlink" title="vue css中/deep/用法"></a>vue css中/deep/用法</h3><p><code>/deep/</code>的意思大概为深入的，深远的（深度选择）。Scoped CSS规范是Web组件产生不污染其他组件，也不被其他组件污<br>染的CSS规范。这样在打包的时候会生成一个独一无二hash值，这样父组件的样式就不会影响到子组件了；再用别人或者第三<br>方组件是，要是想修改其组件的样式，一般都是提取公共文件，但是存在问题是有时候你修改一处就可能影响到别的地方，这<br>个时候就可以需要一种方式，既不影响别的地方，又能修改子组件的样式。</p>
+            <h3 id="使用http-server快速搭建本地服务"><a href="#使用http-server快速搭建本地服务" class="headerlink" title="使用http-server快速搭建本地服务"></a>使用http-server快速搭建本地服务</h3><p><em>在静态页面中需要进行局域网进行访问时，可以开启这个 http-server 来进行访问</em></p>
 <ul>
-<li><em>加入scoped属性</em></li>
+<li><p>该环境是基于node环境的，所以必须先安装node.js</p>
+<blockquote>
+<p>打开命令行模式，输入<code>node -v</code><br>如果显示了版本号，就说明已经安装完成。如果提示没有这个命令，请在<a href="http://nodejs.cn/" target="_blank" rel="noopener">node.js官网</a>进行安装</p>
+</blockquote>
+</li>
+<li><p>如果完成上一步，在命令行下进行安装http-server,命令是<code>npm install http-server -g</code></p>
+</li>
+<li><p>安装完成后，进入你需要局域网访问的目录，敲<code>hs</code>命令就会显示访问的端口，就可以直接进行访问</p>
+</li>
 </ul>
-<p><img src="/images/WechatIMG8282.png" alt="avatar"><br><img src="/images/WechatIMG86.png" alt="avatar"><br>可以看出，scoped属性会将 template 中的每个元素加入 [data-v-xxxx]的hash值，但如果引用了第三方组件，<code>默认只会对组件的最外层（div）加入这个 [data-v-xxxx] 属性，但第二层开始就没有效果了</code>，如上图所示，第一层el-tabs加上了[data-v-xxxx]，底下<br>的el-tabs__header就没有了</p>
-<ul>
-<li><em>这个时候修改样式，未加/deep/</em></li>
-</ul>
-<p><img src="/images/WechatIMG85.png" alt="avatar"><br><img src="/images/noDeep.png" alt="avatar"><br>编译后的css可以看出，寻找的路径为<code>.m-transaction-details-wrapper .el-tabs .el-tabs__header[data-v-5419d6af]</code><br>但是在看html元素上，并没有在<code>.el-tabs__header</code>加入[data-v-5419d6af]，所以导致不生效</p>
-<ul>
-<li><em>加上/deep/</em></li>
-</ul>
-<p><img src="/images/WechatIMG87.png" alt="avatar"><br><img src="/images/deep.png" alt="avatar"><br>此时编译后的css寻找路径为<code>.m-transaction-details-wrapper[data-v-5419d6af] .el-tabs .el-tabs__header</code>,就可以生<br>效了，这类似于css module中的global属性，加上global修改第三方组件才能生效</p>
+<p><img src="/images/http-server.png" alt="avatar"></p>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2019年11月22日 16:36</p>
-        <p>原始链接： <a class="post-url" href="/2019/11/15/deepcss/" title="vue css中/deep/深度选择">https://xmtd.github.io/2019/11/15/deepcss/</a></p>
+        <p>最后更新： 2019年11月25日 14:28</p>
+        <p>原始链接： <a class="post-url" href="/2019/11/25/http-server/" title="http server">https://xmtd.github.io/2019/11/25/http-server/</a></p>
         <footer>
             <a href="https://Xmtd.github.io">
                 <img src="/images/logo.png" alt="mtd">
@@ -202,7 +197,7 @@
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xmtd.github.io/2019/11/15/deepcss/&title=《vue css中/deep/深度选择》 — Xmtd&pic=/images/wechat88.png" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xmtd.github.io/2019/11/25/http-server/&title=《http server》 — Xmtd&pic=https://Xmtd.github.ioimages/logo.png" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -212,22 +207,22 @@
             </a>
           </li>
           <li>
-            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xmtd.github.io/2019/11/15/deepcss/&title=《vue css中/deep/深度选择》 — Xmtd&source=" data-title="QQ">
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xmtd.github.io/2019/11/25/http-server/&title=《http server》 — Xmtd&source=" data-title="QQ">
               <i class="fa fa-qq"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xmtd.github.io/2019/11/15/deepcss/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xmtd.github.io/2019/11/25/http-server/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《vue css中/deep/深度选择》 — Xmtd&url=https://xmtd.github.io/2019/11/15/deepcss/&via=https://Xmtd.github.io" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《http server》 — Xmtd&url=https://xmtd.github.io/2019/11/25/http-server/&via=https://Xmtd.github.io" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xmtd.github.io/2019/11/15/deepcss/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xmtd.github.io/2019/11/25/http-server/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -237,7 +232,7 @@
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" target="_blank" rel="noopener" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://xmtd.github.io/2019/11/15/deepcss/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://xmtd.github.io/2019/11/25/http-server/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -249,9 +244,7 @@
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/css/" class="color4">css</a>
-      
-    <a href="/tags/vue/" class="color4">vue</a>
+    <a href="/tags/server/" class="color2">server</a>
       
   </li>
 
@@ -264,26 +257,16 @@
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#vue-css中-deep-用法"><span class="post-toc-text">vue css中/deep/用法</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用http-server快速搭建本地服务"><span class="post-toc-text">使用http-server快速搭建本地服务</span></a></li></ol>
         </nav>
     </aside>
     
 
 <nav id="article-nav">
   
-    <a href="/2019/11/18/async-await/" id="article-nav-newer" class="article-nav-link-wrap">
-
-      <span class="article-nav-title">
-        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
-        
-          async/await 用法整理
-        
-      </span>
-    </a>
   
-  
-    <a href="/2019/11/04/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">Hello World</span>
+    <a href="/2019/11/18/async-await/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">async/await 用法整理</span>
       <i class="fa fa-hand-o-right" aria-hidden="true"></i>
     </a>
   
@@ -297,7 +280,7 @@
     <div id="comments">
         <script>
             var gitment = new Gitment({
-                id: 'vue css中/deep/深度选择',
+                id: 'http server',
                 owner: 'Xmtd',
                 repo: 'xmtd-comments',
                 oauth: {
