@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>简单易懂的CSS Modules | Xmtd</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="mtd,mtd's Blog" />
+  
+  <meta name="description" content="CSS的痛点我们都知道，css入门简单，深入就比较难，样式简单维护难，css痛点有很多  css的规则是全局的，任何一个组件的样式规则，都对真个页面有效，很容易出现全局污染（覆盖）问题  为了解决全局污染问题，那就吧class命名写长一点、加一层父级选择器、降低冲突几率，但css命名就混乱了  组件依赖管理不彻底，组件应该相互独立，引入一个组件时，应该只引入它所需要的 CSS 样式   CSS M">
+<meta name="keywords" content="css,css-modules">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单易懂的CSS Modules">
+<meta property="og:url" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;2019&#x2F;11&#x2F;27&#x2F;cssmodule&#x2F;index.html">
+<meta property="og:site_name" content="Xmtd">
+<meta property="og:description" content="CSS的痛点我们都知道，css入门简单，深入就比较难，样式简单维护难，css痛点有很多  css的规则是全局的，任何一个组件的样式规则，都对真个页面有效，很容易出现全局污染（覆盖）问题  为了解决全局污染问题，那就吧class命名写长一点、加一层父级选择器、降低冲突几率，但css命名就混乱了  组件依赖管理不彻底，组件应该相互独立，引入一个组件时，应该只引入它所需要的 CSS 样式   CSS M">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;WechatIMG939.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;WechatIMG967.png">
+<meta property="og:updated_time" content="2019-11-27T09:19:51.556Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;images&#x2F;WechatIMG939.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">mtd&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        mtd&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 WEB 开发的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-cssmodule" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      简单易懂的CSS Modules
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2019-11-27
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h3 id="CSS的痛点"><a href="#CSS的痛点" class="headerlink" title="CSS的痛点"></a>CSS的痛点</h3><p>我们都知道，css入门简单，深入就比较难，样式简单维护难，css痛点有很多</p>
+<ol>
+<li><p>css的规则是全局的，任何一个组件的样式规则，都对真个页面有效，很容易出现全局污染（覆盖）问题</p>
+</li>
+<li><p>为了解决全局污染问题，那就吧class命名写长一点、加一层父级选择器、降低冲突几率，但css命名就混乱了</p>
+</li>
+<li><p>组件依赖管理不彻底，组件应该相互独立，引入一个组件时，应该只引入它所需要的 CSS 样式</p>
+</li>
+</ol>
+<h3 id="CSS-Module"><a href="#CSS-Module" class="headerlink" title="CSS Module"></a>CSS Module</h3><p>为了解决一上问题，就产生css module, css module会产生局部作用域，它会产生一个独一无二的<code>class</code>名字，不会与其他同名选择器重名</p>
+<h4 id="启用-css-module"><a href="#启用-css-module" class="headerlink" title="启用 css module"></a>启用 css module</h4><p>在项目里应用CSS Modules有很多方法，目前比较常用的是使用webpack的<a href="https://github.com/webpack-contrib/css-loader#css-modules" target="_blank" rel="noopener">css-loader</a>,此处是与sass一起使用的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.scss/</span>,</span><br><span class="line">        exclude: <span class="regexp">/node_modules/</span>,</span><br><span class="line">        use: [</span><br><span class="line">            &#123;</span><br><span class="line">                loader: <span class="string">'style-loader'</span></span><br><span class="line">            &#125;, &#123;</span><br><span class="line">                loader: <span class="string">'css-loader'</span>,</span><br><span class="line">                options: &#123;</span><br><span class="line">                    modules: <span class="literal">true</span>,   <span class="comment">// 开启 css module</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, &#123;</span><br><span class="line">                loader: <span class="string">'postcss-loader'</span>    <span class="comment">// 自动添加css前缀</span></span><br><span class="line">            &#125;, &#123;</span><br><span class="line">                loader: <span class="string">'sass-loader'</span>,</span><br><span class="line">                options: &#123;</span><br><span class="line">                    sourceMap: <span class="literal">true</span>,</span><br><span class="line">                    outputStyle: &#123;</span><br><span class="line">                        expanded: <span class="literal">true</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用css-module"><a href="#使用css-module" class="headerlink" title="使用css module"></a>使用css module</h4><p>编写 scss</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.root</span> &#123;</span><br><span class="line">  <span class="selector-class">.text</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用</p>
+<figure class="highlight typescript"><figcaption><span>jsx</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">'./index.scss'</span>;</span><br><span class="line"></span><br><span class="line">&lt;div className=&#123;styles.root&#125;&gt;</span><br><span class="line">    &lt;div className=&#123;styles.text&#125;&gt;test&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
+<p>编译之后<br><img src="/images/WechatIMG939.png" alt="avatar"><br>可以看出css module为每个class生成了唯一的class类名，它将class转换成对应的全局唯一hash值来形成<code>局部作用域</code>。<br>css module默认使用的是<code>局部作用域</code>，就相当于给每个 class 名外加了一个 :local 这是默认的，也可以显式使用，<br>但是当需要修改第三方组件的class时，就需要使用<code>全局作用域</code>来更改类</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">:local(.root) &#123;     // 默认是局部作用域</span><br><span class="line">  :local(.text)&#123;</span><br><span class="line">    width: <span class="number">200px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  :global &#123;     // 修改第三方组件（antd）,使用全局作用域，但是他是相对于.root底下的全局作用域，所已完全不必担心污染其他组件</span><br><span class="line">    .ant-btn &#123;</span><br><span class="line">      width: <span class="number">200px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.ant-input</span> &#123;</span><br><span class="line">      <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/WechatIMG967.png" alt="avatar"><br>图上所知，加上global属性，就会在相对应的root底下的<code>全局作用域</code>找类名，那么他们在元素上用法的区别就是局部作用域需要使用js式（styls.xxx）;全局作用域的就是直接使用</p>
+<figure class="highlight typescript"><figcaption><span>jsx</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">.root &#123;</span><br><span class="line">    .text &#123;</span><br><span class="line">        width: <span class="number">200</span>px</span><br><span class="line">    &#125;</span><br><span class="line">    :global &#123;</span><br><span class="line">        .text2 &#123;</span><br><span class="line">             width: <span class="number">200</span>px</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">'./index.scss'</span>;</span><br><span class="line"></span><br><span class="line">&lt;div className=&#123;styles.root&#125;&gt;</span><br><span class="line">    &lt;div className=&#123;styles.text&#125;&gt;test&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;div className='text2'&gt;test2&lt;/</span>div&gt;  <span class="comment">// 直接使用</span></span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p><em><a href="https://vue-loader.vuejs.org/zh/guide/css-modules.html#%E7%94%A8%E6%B3%95" target="_blank" rel="noopener">vue中使用css module</a></em></p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>无论是一直以来我们认真遵循的命名约定，还是这个新的CSS Modules，目的都是一样的：可维护的css代码。我觉得就CSS Modules基本还是在写css这一点来说，它还是很友好的。</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年11月27日 17:19</p>
+        <p>原始链接： <a class="post-url" href="/2019/11/27/cssmodule/" title="简单易懂的CSS Modules">https://xmtd.github.io/2019/11/27/cssmodule/</a></p>
+        <footer>
+            <a href="https://Xmtd.github.io">
+                <img src="/images/logo.png" alt="mtd">
+                mtd
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/WechatIMG1.png" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/WechatIMG1.png">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" target="_blank" rel="noopener" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xmtd.github.io/2019/11/27/cssmodule/&title=《简单易懂的CSS Modules》 — Xmtd&pic=https://Xmtd.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xmtd.github.io/2019/11/27/cssmodule/&title=《简单易懂的CSS Modules》 — Xmtd&source=" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xmtd.github.io/2019/11/27/cssmodule/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《简单易懂的CSS Modules》 — Xmtd&url=https://xmtd.github.io/2019/11/27/cssmodule/&via=https://Xmtd.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xmtd.github.io/2019/11/27/cssmodule/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://xmtd.github.io/2019/11/27/cssmodule/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/css/" class="color4">css</a>
+      
+    <a href="/tags/css-modules/" class="color2">css-modules</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CSS的痛点"><span class="post-toc-text">CSS的痛点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CSS-Module"><span class="post-toc-text">CSS Module</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#启用-css-module"><span class="post-toc-text">启用 css module</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#使用css-module"><span class="post-toc-text">使用css module</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#其他"><span class="post-toc-text">其他</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#结语"><span class="post-toc-text">结语</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/25/http-server/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">http server</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+    <link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+<script src="https://billts.site/js/gitment.js"></script>
+    <div id="comments">
+        <script>
+            var gitment = new Gitment({
+                id: '简单易懂的CSS Modules',
+                owner: 'Xmtd',
+                repo: 'xmtd-comments',
+                oauth: {
+                    client_id: '2a738abad82fbbd94bcd',
+                    client_secret: 'ce7e20bbeb80416391ce94fa9e3b7354273b6ac4',
+                },
+            })
+            gitment.render('comments')
+        </script>
+    </div>
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 mtd<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://Xmtd.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/css-modules/" style="font-size: 10px;">css-modules</a> <a href="/tags/server/" style="font-size: 10px;">server</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/%E5%BC%82%E6%AD%A5/" style="font-size: 10px;">异步</a> <a href="/tags/%E6%BA%90%E7%A0%81/" style="font-size: 10px;">源码</a>
+        </div>
+    </div>
+    <a href="javascript:;" target="_blank" rel="noopener" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/css-modules/" style="font-size: 10px;">css-modules</a> <a href="/tags/server/" style="font-size: 10px;">server</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/%E5%BC%82%E6%AD%A5/" style="font-size: 10px;">异步</a> <a href="/tags/%E6%BA%90%E7%A0%81/" style="font-size: 10px;">源码</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;" target="_blank" rel="noopener">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":200,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"dialog":{"enable":true,"script":{"every idle 10s":"$hitokoto$","hover .star":"星星在天上而你在我心里 (*/ω＼*)","tap body":"哎呀！别碰我！","tap face":"人家已经不是小孩子了！"}},"log":false});</script></body>
+</html>
