@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>代理模式 - proxy | Xmtd</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="mtd,mtd's Blog" />
+  
+  <meta name="description" content="什么是代理模式 代理模式（英语：Proxy Pattern）是程序设计中的一种设计模式。   所谓的代理者是指一个类别可以作为其它东西的接口。代理者可以作任何东西的接口：网络连接、内存中的大对象、文件或其它昂贵或无法复制的资源。   著名的代理模式例子为引用计数（英语：reference counting）指针对象。   当一个复杂对象的多份副本须存在时，代理模式可以结合享元模式以减少内存用量。典">
+<meta name="keywords" content="es6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代理模式 - proxy">
+<meta property="og:url" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;2020&#x2F;02&#x2F;24&#x2F;proxy&#x2F;index.html">
+<meta property="og:site_name" content="Xmtd">
+<meta property="og:description" content="什么是代理模式 代理模式（英语：Proxy Pattern）是程序设计中的一种设计模式。   所谓的代理者是指一个类别可以作为其它东西的接口。代理者可以作任何东西的接口：网络连接、内存中的大对象、文件或其它昂贵或无法复制的资源。   著名的代理模式例子为引用计数（英语：reference counting）指针对象。   当一个复杂对象的多份副本须存在时，代理模式可以结合享元模式以减少内存用量。典">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-02-24T12:31:34.837Z">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">mtd&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        mtd&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 WEB 开发的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-proxy" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      代理模式 - proxy
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2020-02-24
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h3 id="什么是代理模式"><a href="#什么是代理模式" class="headerlink" title="什么是代理模式"></a>什么是代理模式</h3><blockquote>
+<p>代理模式（英语：Proxy Pattern）是程序设计中的一种设计模式。</p>
+</blockquote>
+<blockquote>
+<p>所谓的代理者是指一个类别可以作为其它东西的接口。代理者可以作任何东西的接口：网络连接、内存中的大对象、文件或其它昂贵或无法复制的资源。</p>
+</blockquote>
+<blockquote>
+<p>著名的代理模式例子为引用计数（英语：reference counting）指针对象。</p>
+</blockquote>
+<blockquote>
+<p>当一个复杂对象的多份副本须存在时，代理模式可以结合享元模式以减少内存用量。典型作法是创建一个复杂对象及多个代理者，每个代理者会引用到原本的复杂对象。而作用在代理者的运算会转送到原本对象。一旦所有的代理者都不存在时，复杂对象会被移除。</p>
+</blockquote>
+<p>上面是维基百科中对代理模式的一个整体的定义.而在JavaScript中代理模式的具体表现形式就是ES6中的新增对象 — <em><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy" target="_blank" rel="noopener">Proxy</a></em></p>
+<h3 id="Proxy-介绍"><a href="#Proxy-介绍" class="headerlink" title="Proxy 介绍"></a>Proxy 介绍</h3><p>在MDN上对于Proxy的解释是:</p>
+<blockquote>
+<p>Proxy 对象用于定义基本操作的自定义行为（如属性查找，赋值，枚举，函数调用等）。</p>
+</blockquote>
+<p><code>Proxy</code>用于修改某些操作的默认行为，也可以理解为在目标对象之前架设一层拦截，外部所有的访问都必须先通过这层拦截，因此提供了一种机制，可以对外部的访问进行过滤和修改。这个词的原理为代理，在这里可以表示由它来“代理”某些操作，译为“代理器”</p>
+<p><em><a href="https://www.w3cplus.com/javascript/use-cases-for-es6-proxies.html" target="_blank" rel="noopener">Proxy的使用场景</a></em></p>
+<p>ES6原生提供了Proxy构造函数，用来生成Proxy实例。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler);</span><br></pre></td></tr></table></figure>
+
+<p><code>Proxy</code>对象的所有用法，都是上面的这种形式。不同的只是<code>handle</code>参数的写法。其中<code>new Proxy</code>用来生成<code>Proxy</code>实例，<code>target</code>是表示所要拦截的对象，<code>handle是</code>用来定制拦截行为的对象</p>
+<p>下面是简单的Proxy例子，使用的是get代理</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> target = &#123;</span><br><span class="line">  x: <span class="number">10</span>,</span><br><span class="line">  y: <span class="number">20</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> handler = &#123;</span><br><span class="line">  <span class="keyword">get</span>: (obj, prop) =&gt; 42</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">target = new Proxy(target, handler)</span><br><span class="line"></span><br><span class="line">target.x //42</span><br><span class="line">target.y //42</span><br><span class="line">target.x // 42</span><br></pre></td></tr></table></figure>
+
+<p>结果是一个对象将为任何属性访问操作都返回“42”。 这包括<code>target.x</code>，<code>target[&#39;x&#39;]</code>，<code>Reflect.get(target, &#39;x&#39;)</code>等。<br>但是，Proxy 当然不限于属性的读取。 它只是十几个不同代理中的一个：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">handler.getPrototypeOf()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在读取代理对象的原型时触发该操作，比如在执行 Object.getPrototypeOf(proxy) 时。</span></span><br><span class="line"></span><br><span class="line">handler.setPrototypeOf()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在设置代理对象的原型时触发该操作，比如在执行 Object.setPrototypeOf(proxy, null) 时。</span></span><br><span class="line"></span><br><span class="line">handler.isExtensible()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在判断一个代理对象是否是可扩展时触发该操作，比如在执行 Object.isExtensible(proxy) 时。</span></span><br><span class="line"></span><br><span class="line">handler.preventExtensions()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在让一个代理对象不可扩展时触发该操作，比如在执行 Object.preventExtensions(proxy) 时。</span></span><br><span class="line"></span><br><span class="line">handler.getOwnPropertyDescriptor()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在获取代理对象某个属性的属性描述时触发该操作，比如在执行 Object.getOwnPropertyDescriptor(proxy, "foo") 时。</span></span><br><span class="line"></span><br><span class="line">handler.defineProperty()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在定义代理对象某个属性时的属性描述时触发该操作，比如在执行 Object.defineProperty(proxy, "foo", &#123;&#125;) 时。</span></span><br><span class="line"></span><br><span class="line">handler.has()  <span class="comment">// 以下几个是常用的</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 在判断代理对象是否拥有某个属性时触发该操作，比如在执行 "foo" in proxy 时。</span></span><br><span class="line"></span><br><span class="line">handler.get()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在读取代理对象的某个属性时触发该操作，比如在执行 proxy.foo 时。</span></span><br><span class="line"></span><br><span class="line">handler.set()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在给代理对象的某个属性赋值时触发该操作，比如在执行 proxy.foo = 1 时。</span></span><br><span class="line"></span><br><span class="line">handler.deleteProperty()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在删除代理对象的某个属性时触发该操作，比如在执行 delete proxy.foo 时。</span></span><br><span class="line"></span><br><span class="line">handler.ownKeys()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在获取代理对象的所有属性键时触发该操作，比如在执行 Object.getOwnPropertyNames(proxy) 时。</span></span><br><span class="line"></span><br><span class="line">handler.apply()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在调用一个目标对象为函数的代理对象时触发该操作，比如在执行 proxy() 时。</span></span><br><span class="line"></span><br><span class="line">handler.construct()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在给一个目标对象为构造函数的代理对象构造实例时触发该操作，比如在执行new proxy() 时。</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="具有代理的API-复杂的示例"><a href="#具有代理的API-复杂的示例" class="headerlink" title="具有代理的API - 复杂的示例"></a>具有代理的API - 复杂的示例</h3><p>通过使用简单用例中的知识，我们可以创建一个API包装器，以便在我们的应用程序中使用。 当前只支持 get 和 post 请求，但它可以很容易地扩展。代码如下所示。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> api  = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;&#125;, &#123;</span><br><span class="line">  <span class="keyword">get</span>(target, key, context) &#123;</span><br><span class="line">    <span class="keyword">if</span> (target[key]) &#123;</span><br><span class="line">      <span class="keyword">return</span> target[key]</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> [<span class="string">'get'</span>, <span class="string">'post'</span>].reduce(<span class="function">(<span class="params">acc, key</span>) =&gt;</span> &#123;</span><br><span class="line">      acc[key] = <span class="function">(<span class="params">config, data</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!config || !config.url || config.url === <span class="string">''</span>) &#123; <span class="comment">// 没有URL</span></span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Url cannot be empty.'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> isPost = key === <span class="string">'post'</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (isPost &amp;&amp; !data) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Please provide data in JSON format when using POST request.'</span>); <span class="comment">// post请求提供JSON格式的数据</span></span><br><span class="line">        </span><br><span class="line">        config.headers = isPost ? <span class="built_in">Object</span>.assign(config.headers || &#123;&#125;, &#123; <span class="string">'content-type'</span>: <span class="string">'application/json;chartset=utf8'</span> &#125;) : config.headers;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">          xhr.open(key, config.url);</span><br><span class="line">          </span><br><span class="line">          <span class="keyword">if</span> (config.headers) &#123;</span><br><span class="line">              <span class="built_in">Object</span>.keys(config.headers).forEach(<span class="function">(<span class="params">header</span>) =&gt;</span> &#123;</span><br><span class="line">                  xhr.setRequestHeader(header, config.headers[header]);</span><br><span class="line">              &#125;);</span><br><span class="line">          &#125;</span><br><span class="line">          </span><br><span class="line">          xhr.onload = <span class="function"><span class="params">()</span> =&gt;</span> (xhr.status === <span class="number">200</span> ? resolve : reject)(xhr);</span><br><span class="line">          xhr.onerror = <span class="function"><span class="params">()</span> =&gt;</span> reject(xhr);</span><br><span class="line">          xhr.send(isPost ? <span class="built_in">JSON</span>.stringify(data) : <span class="literal">null</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;, target)[key]</span><br><span class="line">    </span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">set</span>() &#123; <span class="comment">// 无法为代理对象新增属性</span></span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'API methods are readonly'</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  deleteProperty() &#123; <span class="comment">// 禁止删除属性</span></span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'API methods cannot be deleted!'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 使用</span></span><br><span class="line">  </span><br><span class="line">  api.get(&#123;</span><br><span class="line">      url: <span class="string">'my-url'</span></span><br><span class="line">  &#125;).then(<span class="function">(<span class="params">xhr</span>) =&gt;</span> &#123;</span><br><span class="line">      alert(<span class="string">'Success'</span>);</span><br><span class="line">  &#125;, (xhr) =&gt; &#123;</span><br><span class="line">      alert(<span class="string">'Fail'</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><code>get</code> 在这里很有趣，它做了几件事。<code>target</code> 是一个空对象，<code>get</code> 方法将在第一次有人使用 api 时创建所有方法(如当前的 get 和 post请求)，在 reduce 回调中，我们根据提供的配置执行API规范所需的验证和检查。在此示例中，我们不允许空URL和发布请求而不提供数据。这些检查可以扩展和修改，但重要的是我们只能在这一个地方集中处理。<br><code>reduce</code> 仅在第一次API调用时完成，之后都会跳过整个 reduce 进程，get 只会执行默认行为并返回属性值，即API处理程序。每个处理程序返回一个Promise对象，负责创建请求并调用服务</p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>当您需要对数据进行更多控制时，代理可以派上用场。你可以根据受控规则扩展或拒绝对原始数据的访问，从而监视对象并确保正确行为。</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2020年02月24日 20:31</p>
+        <p>原始链接： <a class="post-url" href="/2020/02/24/proxy/" title="代理模式 - proxy">https://xmtd.github.io/2020/02/24/proxy/</a></p>
+        <footer>
+            <a href="https://Xmtd.github.io">
+                <img src="/images/logo.png" alt="mtd">
+                mtd
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/WechatIMG1.png" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/WechatIMG1.png">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" target="_blank" rel="noopener" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xmtd.github.io/2020/02/24/proxy/&title=《代理模式 - proxy》 — Xmtd&pic=/images/proxy.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xmtd.github.io/2020/02/24/proxy/&title=《代理模式 - proxy》 — Xmtd&source=" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xmtd.github.io/2020/02/24/proxy/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《代理模式 - proxy》 — Xmtd&url=https://xmtd.github.io/2020/02/24/proxy/&via=https://Xmtd.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xmtd.github.io/2020/02/24/proxy/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://xmtd.github.io/2020/02/24/proxy/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/es6/" class="color4">es6</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#什么是代理模式"><span class="post-toc-text">什么是代理模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Proxy-介绍"><span class="post-toc-text">Proxy 介绍</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#具有代理的API-复杂的示例"><span class="post-toc-text">具有代理的API - 复杂的示例</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#结语"><span class="post-toc-text">结语</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/27/cssmodule/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">简单易懂的CSS Modules</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+    <link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+<script src="https://billts.site/js/gitment.js"></script>
+    <div id="comments">
+        <script>
+            var gitment = new Gitment({
+                id: '代理模式 - proxy',
+                owner: 'Xmtd',
+                repo: 'xmtd-comments',
+                oauth: {
+                    client_id: '2a738abad82fbbd94bcd',
+                    client_secret: 'ce7e20bbeb80416391ce94fa9e3b7354273b6ac4',
+                },
+            })
+            gitment.render('comments')
+        </script>
+    </div>
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2020 mtd<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://Xmtd.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/css-modules/" style="font-size: 10px;">css-modules</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/server/" style="font-size: 10px;">server</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/%E5%BC%82%E6%AD%A5/" style="font-size: 10px;">异步</a> <a href="/tags/%E6%BA%90%E7%A0%81/" style="font-size: 10px;">源码</a>
+        </div>
+    </div>
+    <a href="javascript:;" target="_blank" rel="noopener" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/css-modules/" style="font-size: 10px;">css-modules</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/server/" style="font-size: 10px;">server</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/%E5%BC%82%E6%AD%A5/" style="font-size: 10px;">异步</a> <a href="/tags/%E6%BA%90%E7%A0%81/" style="font-size: 10px;">源码</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;" target="_blank" rel="noopener">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":200,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"dialog":{"enable":true,"script":{"every idle 10s":"$hitokoto$","hover .star":"星星在天上而你在我心里 (*/ω＼*)","tap body":"哎呀！别碰我！","tap face":"人家已经不是小孩子了！"}},"log":false});</script></body>
+</html>
