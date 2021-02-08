@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>TypeScript 的 extends 条件类型 | Xmtd</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="mtd,mtd's Blog" />
+  
+  <meta name="description" content="TypeScript 的 extends 条件类型这是 TS2.8 版本中推出的特性，此能力让类型定义变的更加灵活，需要注意：extends 运用在 type 和 class 中时完全是两种作用的效果。  条件类型是一种 条件表达式 进行类型的关系检测  分为以下几种类型检测 简单值(原始值)的匹配 123456相当于是匹配两值是否相等type Equal&amp;lt;X, Y&amp;gt; = X exte">
+<meta name="keywords" content="typescript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TypeScript 的 extends 条件类型">
+<meta property="og:url" content="https:&#x2F;&#x2F;xmtd.github.io&#x2F;2020&#x2F;12&#x2F;24&#x2F;ts-extends-md&#x2F;index.html">
+<meta property="og:site_name" content="Xmtd">
+<meta property="og:description" content="TypeScript 的 extends 条件类型这是 TS2.8 版本中推出的特性，此能力让类型定义变的更加灵活，需要注意：extends 运用在 type 和 class 中时完全是两种作用的效果。  条件类型是一种 条件表达式 进行类型的关系检测  分为以下几种类型检测 简单值(原始值)的匹配 123456相当于是匹配两值是否相等type Equal&amp;lt;X, Y&amp;gt; = X exte">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-02-08T09:58:37.237Z">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">mtd&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        mtd&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个专注 WEB 开发的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-ts-extends-md" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      TypeScript 的 extends 条件类型
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2020-12-24
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h3 id="TypeScript-的-extends-条件类型"><a href="#TypeScript-的-extends-条件类型" class="headerlink" title="TypeScript 的 extends 条件类型"></a>TypeScript 的 extends 条件类型</h3><p>这是 <a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html#conditional-types" target="_blank" rel="noopener">TS2.8</a> 版本中推出的特性，此能力让类型定义变的更加灵活，需要注意：extends 运用在 type 和 class 中时完全是两种作用的效果。</p>
+<blockquote>
+<p>条件类型是一种 <strong>条件表达式</strong> 进行类型的关系检测</p>
+</blockquote>
+<h4 id="分为以下几种类型检测"><a href="#分为以下几种类型检测" class="headerlink" title="分为以下几种类型检测"></a>分为以下几种类型检测</h4><ol>
+<li><p>简单值(原始值)的匹配</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">相当于是匹配两值是否相等</span><br><span class="line"><span class="keyword">type</span> Equal&lt;X, Y&gt; = X <span class="keyword">extends</span> Y ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Num = Equal&lt;<span class="number">1</span>, <span class="number">1</span>&gt;; <span class="comment">// true</span></span><br><span class="line"><span class="keyword">type</span> Str = Equal&lt;<span class="string">'a'</span>, <span class="string">'a'</span>&gt;; <span class="comment">// true</span></span><br><span class="line"><span class="keyword">type</span> Boo = Equal&lt;<span class="literal">true</span>, <span class="literal">false</span>&gt;; <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>简单的类型匹配</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">匹配是否属于某个基本类型</span><br><span class="line"><span class="keyword">type</span> isStr&lt;T&gt; = T <span class="keyword">extends</span> <span class="built_in">string</span> ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br><span class="line">isStr&lt;<span class="string">"2"</span>&gt; <span class="comment">// true</span></span><br><span class="line">isStr&lt;<span class="number">2</span>&gt; <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">当然，我们也可以像写三元表达式一样进行类型匹配</span><br><span class="line"><span class="keyword">type</span> TypeName&lt;T&gt; =</span><br><span class="line">    T <span class="keyword">extends</span> <span class="built_in">string</span> ? <span class="string">"string"</span> :</span><br><span class="line">    T <span class="keyword">extends</span> <span class="built_in">number</span> ? <span class="string">"number"</span> :</span><br><span class="line">    T <span class="keyword">extends</span> <span class="built_in">boolean</span> ? <span class="string">"boolean"</span> :</span><br><span class="line">    T <span class="keyword">extends</span> <span class="literal">undefined</span> ? <span class="string">"undefined"</span> :</span><br><span class="line">    T <span class="keyword">extends</span> <span class="built_in">Function</span> ? <span class="string">"function"</span> :</span><br><span class="line">    <span class="string">"object"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> A = TypeName&lt;<span class="string">"a"</span>&gt;;     <span class="comment">// "string"</span></span><br><span class="line"><span class="keyword">type</span> B = TypeName&lt;<span class="literal">true</span>&gt;;    <span class="comment">// "boolean"</span></span><br><span class="line"><span class="keyword">type</span> C = TypeName&lt;<span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">void</span>&gt;;  <span class="comment">// "function"</span></span><br><span class="line"><span class="keyword">type</span> D = TypeName&lt;<span class="built_in">string</span>[]&gt;;    <span class="comment">// "object"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>判断联合类型</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> A&lt;A, B&gt; = A <span class="keyword">extends</span> B ? <span class="string">'true'</span> : <span class="string">'false'</span>; <span class="comment">// 'true'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> B = <span class="string">'x'</span>;</span><br><span class="line"><span class="keyword">type</span> C = <span class="string">'x'</span> | <span class="string">'y'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> D = A&lt;B, C&gt;  <span class="comment">// 'true'</span></span><br><span class="line">看上去没什么问题，那是因为我们传入了一个明确的判断值，肯定为 <span class="string">'true'</span>。</span><br><span class="line">但是当传入的A是联合类型的话，返回的值则大径相庭</span><br><span class="line"><span class="keyword">type</span> B = <span class="string">'x'</span> | <span class="string">'y'</span>;</span><br><span class="line"><span class="keyword">type</span> C = <span class="string">'x'</span> | <span class="string">'y'</span>;</span><br><span class="line"><span class="keyword">type</span> D = A&lt;B, C&gt;  <span class="comment">// 'true'  当两个联合一样返回是'true'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> B = <span class="string">'x'</span> | <span class="string">'y'</span> | <span class="string">'z'</span>;</span><br><span class="line"><span class="keyword">type</span> C = <span class="string">'x'</span> | <span class="string">'y'</span>;</span><br><span class="line"><span class="keyword">type</span> D = A&lt;B, C&gt;  <span class="comment">// 'true' | 'false'  两个联合类型不一样时，返回的是 'true'|'false'</span></span><br><span class="line"></span><br><span class="line">其实是因为Ts的一个 *分布条件类型* 特性, T <span class="keyword">extends</span> U ? X : Y，当 T 是 A|B 时候，会拆分为A <span class="keyword">extends</span> U ? X : Y | B <span class="keyword">extends</span> U ? X : Y。</span><br><span class="line">上面被转换为：<span class="string">'x'</span> <span class="keyword">extends</span> C ? <span class="string">'true'</span> : <span class="string">'false'</span> | <span class="string">'y'</span> <span class="keyword">extends</span> C ? <span class="string">'true'</span> : <span class="string">'false'</span> | <span class="string">'z'</span> <span class="keyword">extends</span> C ? <span class="string">'true'</span> : <span class="string">'false'</span> ==&gt; <span class="string">'true'</span> | <span class="string">'true'</span> | <span class="string">'false'</span> ==&gt; <span class="string">'true'</span> | <span class="string">'false'</span></span><br><span class="line"></span><br><span class="line">通过这个特性，我们可以实现Exclude过滤功能的函数:</span><br><span class="line"><span class="keyword">type</span> Exclude&lt;T, U&gt; = T <span class="keyword">extends</span> U ? never : T;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Values = Exclude&lt;<span class="string">"x"</span> | <span class="string">"y"</span> | <span class="string">"z"</span>, <span class="string">"x"</span>&gt;;  <span class="comment">// 'y' | 'z'</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2021年02月08日 17:58</p>
+        <p>原始链接： <a class="post-url" href="/2020/12/24/ts-extends-md/" title="TypeScript 的 extends 条件类型">https://xmtd.github.io/2020/12/24/ts-extends-md/</a></p>
+        <footer>
+            <a href="https://Xmtd.github.io">
+                <img src="/images/logo.png" alt="mtd">
+                mtd
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/WechatIMG1.png" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/WechatIMG1.png">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" target="_blank" rel="noopener" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://xmtd.github.io/2020/12/24/ts-extends-md/&title=《TypeScript 的 extends 条件类型》 — Xmtd&pic=/ts-extends.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xmtd.github.io/2020/12/24/ts-extends-md/&title=《TypeScript 的 extends 条件类型》 — Xmtd&source=" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xmtd.github.io/2020/12/24/ts-extends-md/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《TypeScript 的 extends 条件类型》 — Xmtd&url=https://xmtd.github.io/2020/12/24/ts-extends-md/&via=https://Xmtd.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://xmtd.github.io/2020/12/24/ts-extends-md/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://xmtd.github.io/2020/12/24/ts-extends-md/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/typescript/" class="color1">typescript</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#TypeScript-的-extends-条件类型"><span class="post-toc-text">TypeScript 的 extends 条件类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#分为以下几种类型检测"><span class="post-toc-text">分为以下几种类型检测</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2020/02/24/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Hello World</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+    <link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+<script src="https://billts.site/js/gitment.js"></script>
+    <div id="comments">
+        <script>
+            var gitment = new Gitment({
+                id: 'TypeScript 的 extends 条件类型',
+                owner: 'Xmtd',
+                repo: 'xmtd-comments',
+                oauth: {
+                    client_id: '2a738abad82fbbd94bcd',
+                    client_secret: 'ce7e20bbeb80416391ce94fa9e3b7354273b6ac4',
+                },
+            })
+            gitment.render('comments')
+        </script>
+    </div>
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2021 mtd<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://Xmtd.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/css-modules/" style="font-size: 10px;">css-modules</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/server/" style="font-size: 10px;">server</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/%E5%BC%82%E6%AD%A5/" style="font-size: 10px;">异步</a> <a href="/tags/%E6%BA%90%E7%A0%81/" style="font-size: 10px;">源码</a>
+        </div>
+    </div>
+    <a href="javascript:;" target="_blank" rel="noopener" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/css-modules/" style="font-size: 10px;">css-modules</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/server/" style="font-size: 10px;">server</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/%E5%BC%82%E6%AD%A5/" style="font-size: 10px;">异步</a> <a href="/tags/%E6%BA%90%E7%A0%81/" style="font-size: 10px;">源码</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;" target="_blank" rel="noopener">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":200,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"dialog":{"enable":true,"script":{"every idle 10s":"$hitokoto$","hover .star":"星星在天上而你在我心里 (*/ω＼*)","tap body":"哎呀！别碰我！","tap face":"人家已经不是小孩子了！"}},"log":false});</script></body>
+</html>
