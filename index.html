@@ -119,10 +119,8 @@
         </div>
         <div class="article-feed">
             <p>
-                1. const断言
-1234它的语法是一个类型断言，用 const 代替类型名称（例如 123 as const）断言构造新的文字表达式时，我们可以向语言发出以下信号：   · 该表达式中的字面类型不应被扩展（例如：不能从“hello”转换为字符串)   · 对象文字获取readonly属性   · 数组文字变成readonly元组
-
-12345678910111213...
+                1. unknownunknown 指的是不可预先定义的类型，在很多场景下，它可以代替 any 的功能同时保留静态类型检查的能力，而 any 是放弃了静态检查
+1234const a: unknown = 123;a.split('');  // Error 静态检查不通过const b: any = 234;b.split('')  // Pass 没有静态检查，运行时...
             </p>
         </div>
       
